@@ -6478,7 +6478,7 @@ BOOST_AUTO_TEST_CASE(function_types_sig)
 			}
 		}
 	)";
-	CHECK_SUCCESS_NO_WARNINGS(text);
+	CHECK_ERROR(text, TypeError, "Member \"sig\" not found");
 	text = R"(
 		contract C {
 			function h() external {
@@ -6489,7 +6489,7 @@ BOOST_AUTO_TEST_CASE(function_types_sig)
 			}
 		}
 	)";
-	CHECK_SUCCESS_NO_WARNINGS(text);
+	CHECK_ERROR(text, TypeError, "Member \"sig\" not found");
 }
 
 BOOST_AUTO_TEST_CASE(using_this_in_constructor)
