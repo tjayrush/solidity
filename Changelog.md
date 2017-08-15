@@ -5,6 +5,7 @@ Features:
  * Syntax Checker: Support ``pragma experimental <feature>;`` to turn on experimental features.
  * Static Analyzer: Warn about large storage structures.
  * Metadata: Store experimental flag in metadata CBOR.
+ * Syntax Checker: Warn if no visibility is specified on contract functions.
  * Type Checker: More detailed error message for invalid overrides.
 
 Bugfixes:
