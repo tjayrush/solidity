@@ -64,4 +64,6 @@ jobs:
             echo "Emscripten output size: $OUTPUT_SIZE"
       - run:
           name: Test
-          command: scripts/test_emscripten.sh
+          command: |
+            apt-get update && apt-get install -qy npm
+            scripts/test_emscripten.sh
