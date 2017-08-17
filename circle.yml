@@ -62,3 +62,6 @@ jobs:
             OUTPUT_SIZE=`ls -la build/solc/soljson.js`
 
             echo "Emscripten output size: $OUTPUT_SIZE"
+      - run:
+          name: Test
+          command: scripts/test_emscripten.sh
