@@ -87,7 +87,7 @@ cmake \
   -DEth_EVMASM_LIBRARY="$WORKSPACE"/solidity/build/libevmasm/libsolevmasm.a \
   -DETH_STATIC=1 -DTESTS=0 \
   ..
-make -j4
+make -j 4
 
 cd ..
 cp build/solc/soljson.js ./
