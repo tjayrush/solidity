@@ -10,7 +10,6 @@ jobs:
           . /entrypoint
           echo $PATH
           echo $EMSCRIPTEN
-          cat $EMSCRIPTEN/cmake/Modules/Platform/Emscripten.cmake
           scripts/travis-emscripten/install_deps.sh
       - run: |
           . /entrypoint

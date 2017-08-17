@@ -57,7 +57,8 @@ echo -en 'travis_fold:start:compiling_solidity\\r'
 cd $WORKSPACE
 mkdir -p build
 cd build
-emcmake cmake \
+cmake \
+  -DCMAKE_TOOLCHAIN_FILE=$EMSCRIPTEN/cmake/Modules/Platform/Emscripten.cmake \
   -DCMAKE_BUILD_TYPE=Release \
   -DEMSCRIPTEN=1 \
   -DBoost_FOUND=1 \
@@ -86,7 +87,7 @@ emcmake cmake \
   -DEth_EVMASM_LIBRARY="$WORKSPACE"/solidity/build/libevmasm/libsolevmasm.a \
   -DETH_STATIC=1 -DTESTS=0 \
   ..
-emmake make -j 4
+make -j4
 
 cd ..
 cp build/solc/soljson.js ./
