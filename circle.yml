@@ -2,12 +2,14 @@ version: 2
 jobs:
   build:
     docker:
-      - image: trzeci/emscripten:sdk-tag-1.37.18-64bit
+      - image: trzeci/emscripten:sdk-tag-1.37.19-64bit
     steps:
       - checkout
-      - run: apt-get update && apt-get install -qy git
       - run: git submodule update --init
-      - run: pwd
-      - run: echo $PATH
-      - run: scripts/travis-emscripten/install_deps.sh
-      - run: scripts/travis-emscripten/build_emscripten.sh
+      - run: |
+          . /entrypoint
+          echo $PATH
+          scripts/travis-emscripten/install_deps.sh
+      - run: |
+          . /entrypoint
+          scripts/travis-emscripten/build_emscripten.sh

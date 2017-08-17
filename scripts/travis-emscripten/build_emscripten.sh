@@ -38,7 +38,6 @@ export WORKSPACE=/root/project
 
 # Boost
 echo -en 'travis_fold:start:compiling_boost\\r'
-PATH=$PATH:/emsdk_portable/emscripten/tag-1.37.18
 cd "$WORKSPACE"/boost_1_57_0
 # if b2 exists, it is a fresh checkout, otherwise it comes from the cache
 # and is already compiled
