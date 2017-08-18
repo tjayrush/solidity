@@ -66,4 +66,6 @@ jobs:
           name: Test
           command: |
             . /entrypoint
+            git config --global user.email "circleci@circleci.com"
+            git config --global user.name "Circle CI"
             scripts/test_emscripten.sh
