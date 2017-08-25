@@ -48,6 +48,8 @@ void Assembly::append(Assembly const& _a)
 	}
 	m_deposit = newDeposit;
 	m_usedTags += _a.m_usedTags;
+	// This does not append the named tags on purpose, they are only available by name inside
+	// the assembly.
 	for (auto const& i: _a.m_data)
 		m_data.insert(i);
 	for (auto const& i: _a.m_strings)
@@ -333,6 +335,13 @@ AssemblyItem const& Assembly::append(AssemblyItem const& _i)
 	return back();
 }
 
+AssemblyItem Assembly::namedTag(string const& _name)
+{
+	if (!m_namedTags.count(_name))
+		m_namedTags[_name] = size_t(newTag().data());
+	return AssemblyItem(Tag, m_namedTags.at(_name));
+}
+
 AssemblyItem Assembly::newPushLibraryAddress(string const& _identifier)
 {
 	h256 h(dev::keccak256(_identifier));
@@ -573,6 +582,7 @@ LinkerObject const& Assembly::assemble() const
 			assertThrow(i.data() != 0, AssemblyException, "");
 			assertThrow(i.splitForeignPushTag().first == size_t(-1), AssemblyException, "Foreign tag.");
 			assertThrow(ret.bytecode.size() < 0xffffffffL, AssemblyException, "Tag too large.");
+			assertThrow(m_tagPositionsInBytecode[size_t(i.data())] == size_t(-1), AssemblyException, "Duplicate tag position.");
 			m_tagPositionsInBytecode[size_t(i.data())] = ret.bytecode.size();
 			ret.bytecode.push_back((byte)Instruction::JUMPDEST);
 			break;

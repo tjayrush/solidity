@@ -77,6 +77,13 @@ EVMAssembly::LabelID EVMAssembly::newLabelId()
 	return m_nextLabelId++;
 }
 
+AbstractAssembly::LabelID EVMAssembly::namedLabel(string const& _name)
+{
+	if (!m_namedLabels.count(_name))
+		m_namedLabels[_name] = newLabelId();
+	return m_namedLabels[_name];
+}
+
 void EVMAssembly::appendLinkerSymbol(string const&)
 {
 	solAssert(false, "Linker symbols not yet implemented.");
